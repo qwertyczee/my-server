@@ -1,0 +1,28 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: python:3.9
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            pip install -r requirements.txt
+      - run:
+          name: Run tests
+          command: |
+            # Pokud máte testy, spusťte je zde
+            echo "No tests defined"
+      - run:
+          name: Deploy to Heroku
+          command: |
+            git remote add heroku https://git.heroku.com/your-heroku-app.git
+            git push heroku main
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
